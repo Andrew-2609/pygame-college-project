@@ -1,2 +1,5 @@
 # IDE/Editor files
 .idea/
+
+# Downloaded files
+download/
