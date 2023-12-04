@@ -1,10 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import sys
+
 import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.constant import COLOR_ORANGE, HALF_WINDOW, MENU_OPTIONS, COLOR_WHITE
+from code.constant import COLOR_ORANGE, HALF_WINDOW, MENU_OPTIONS, COLOR_WHITE, COLOR_YELLOW
 
 
 class Menu:
@@ -18,6 +20,8 @@ class Menu:
         pygame.mixer_music.play(loops=-1)
         pygame.mixer_music.set_volume(.125)
 
+        selected_option = 0
+
         while True:
             self.window.blit(source=self.surface, dest=self.rect)
             self.display_menu_text(50, 'Mountain', COLOR_ORANGE, (HALF_WINDOW, 70))
@@ -25,7 +29,21 @@ class Menu:
 
             for option in range(len(MENU_OPTIONS)):
                 offset = (option + 1) * 40
-                self.display_menu_text(30, MENU_OPTIONS[option], COLOR_WHITE, (HALF_WINDOW, 140 + offset))
+                color = COLOR_YELLOW if option == selected_option else COLOR_WHITE
+                self.display_menu_text(30, MENU_OPTIONS[option], color, (HALF_WINDOW, 140 + offset))
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_DOWN:
+                        selected_option = selected_option + 1 if selected_option < len(MENU_OPTIONS) - 1 else 0
+                    if event.key == pygame.K_UP:
+                        selected_option = selected_option - 1 if selected_option > 0 else len(MENU_OPTIONS) - 1
+                    if event.key == pygame.K_RETURN:
+                        return MENU_OPTIONS[selected_option]
 
             pygame.display.flip()
 
