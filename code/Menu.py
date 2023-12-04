@@ -4,7 +4,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.constant import WINDOW_WIDTH
+from code.constant import COLOR_ORANGE, HALF_WINDOW, MENU_OPTIONS, COLOR_WHITE
 
 
 class Menu:
@@ -20,7 +20,13 @@ class Menu:
 
         while True:
             self.window.blit(source=self.surface, dest=self.rect)
-            self.display_menu_text(50, 'Mountain', (255, 128, 0), (WINDOW_WIDTH / 2, 70))
+            self.display_menu_text(50, 'Mountain', COLOR_ORANGE, (HALF_WINDOW, 70))
+            self.display_menu_text(50, 'Shooter', COLOR_ORANGE, (HALF_WINDOW, 120))
+
+            for option in range(len(MENU_OPTIONS)):
+                offset = (option + 1) * 40
+                self.display_menu_text(30, MENU_OPTIONS[option], COLOR_WHITE, (HALF_WINDOW, 140 + offset))
+
             pygame.display.flip()
 
     def display_menu_text(self, text_size: int, text: str, text_color: tuple, text_center_position: tuple):
