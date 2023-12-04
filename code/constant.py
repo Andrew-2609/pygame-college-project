@@ -1,2 +1,14 @@
+# Window
 WINDOW_WIDTH = 576
 WINDOW_HEIGHT = 324
+HALF_WINDOW = WINDOW_WIDTH / 2
+
+# Menu Options
+MENU_OPTIONS = (
+    'NEW GAME 1P',
+    'EXIT'
+)
+
+# Colors
+COLOR_WHITE = (255, 255, 255)
+COLOR_ORANGE = (255, 128, 0)
