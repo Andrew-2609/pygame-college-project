@@ -14,7 +14,7 @@ class Level:
         self.window = window
         self.name = name
         self.entity_list: list[Entity] = []
-        self.entity_list.append(EntityFactory.get_background('level1_bg0'))
+        self.entity_list.extend(EntityFactory.get_background('level1'))
 
     def run(self, ):
         while True:

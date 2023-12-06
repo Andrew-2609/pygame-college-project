@@ -12,4 +12,9 @@ class EntityFactory:
 
     @staticmethod
     def get_background(name: str, position: tuple = (0, 0)):
-        return Background(name, position)
+        match name:
+            case 'level1':
+                list_bg: list[Background] = []
+                for i in range(6):
+                    list_bg.append(Background(f'level1_bg{i}', position))
+                return list_bg
