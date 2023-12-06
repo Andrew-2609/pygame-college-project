@@ -1,8 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import sys
+
+import pygame.display
 from pygame import Surface
 
 from code.Entity import Entity
+from code.EntityFactory import EntityFactory
 
 
 class Level:
@@ -10,6 +14,16 @@ class Level:
         self.window = window
         self.name = name
         self.entity_list: list[Entity] = []
+        self.entity_list.append(EntityFactory.get_background('level1_bg0'))
 
     def run(self, ):
-        pass
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            for entity in self.entity_list:
+                self.window.blit(source=entity.surface, dest=entity.rect)
+
+            pygame.display.flip()
